@@ -59,7 +59,15 @@
 			<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 				<div class="text-center">
 				<div class="author-img" style="background-image: url(images/QHN.jpeg);"></div>
-				<h1 id="colorlib-logo"><a href="index.html">Quang-Huy Nguyen</a></h1>
+				<h1 id="colorlib-logo">
+				<a href="index.html" style="display: inline-flex; align-items: center;">
+					Quang-Huy Nguyen
+					<span class="my-tooltip">
+					🤓
+					<span class="my-tooltip-text">Smart is the new Sexy</span>
+					</span>
+				</a>
+				</h1>
 				<span class="position">
 					<a href="https://www.auburn.edu/"><span style="color: grey;">Auburn University</span></a>
 				</span>
@@ -100,7 +108,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> 
 <span>Last Update: Feb 18, 2026</span></small></p>
 			</div>
-			<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=uk7inqkcxD7zV_n2SjGvBUPL002nRyMsNt895CillEg&co=8ac4ed'></script>
+			<!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=uk7inqkcxD7zV_n2SjGvBUPL002nRyMsNt895CillEg&co=8ac4ed'></script> -->
 		</aside>
 
 		<div id="colorlib-main">
@@ -268,6 +276,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
+
+	<script>
+	document.querySelectorAll('.my-tooltip').forEach(function(el) {
+	const tooltip = el.querySelector('.my-tooltip-text');
+
+	el.addEventListener('mouseenter', function(e) {
+		const rect = el.getBoundingClientRect();
+		tooltip.style.left = (rect.right + 10) + 'px';
+		tooltip.style.top = (rect.top + rect.height / 2) + 'px';
+		tooltip.style.transform = 'translateY(-50%)';
+	});
+	});
+	</script>
 
 	</body>
 </html>

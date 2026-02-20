@@ -93,7 +93,8 @@ figure {
   float: left;
   width: 300px;
   position: fixed;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: visible;
   z-index: 1001;
   background: #f2f3f7;
   -webkit-transition: 0.5s;
@@ -1481,4 +1482,30 @@ body.offcanvas {
 /* Add space before navigation menu */
 #colorlib-aside #colorlib-main-menu {
     margin-top: 25px;
+}
+
+.my-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+
+.my-tooltip-text {
+  visibility: hidden;
+  position: fixed;                 /* key change */
+  background: #111;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 14px;
+  z-index: 999999;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.my-tooltip:hover .my-tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
