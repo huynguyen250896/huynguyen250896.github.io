@@ -109,7 +109,7 @@ figure {
       -o-transform: translateX(-300px);
       transform: translateX(-300px);
       padding-top: 4em; } }
-  #colorlib-aside .author-img {
+  /* #colorlib-aside .author-img {
     width: 150px;
     height: 150px;
     margin: 0 auto;
@@ -117,7 +117,16 @@ figure {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
-    border-radius: 50%; }
+    border-radius: 50%; } */
+  #colorlib-aside .author-img {
+    width: 160px;          /* Width of the rectangle */
+    height: 200px;         /* Height - making it taller reveals the rest of the portrait */
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 0;      /* Removes the circle completely */
+    background-size: contain; /* OPTION A: Shows the WHOLE photo, might have gaps */
+    /* background-size: cover; */ /* OPTION B: Fills the box, might crop slightly */
+  }
   #colorlib-aside .position {
     display: block;
     margin-bottom: 2em;
