@@ -22,6 +22,78 @@
 <script src="js/modernizr-2.6.2.min.js"></script>
 </head>
 
+<!-- Cite Modal -->
+<div id="citeModal" class="cite-modal">
+  <div class="cite-box">
+    <div class="cite-header">
+      <h3>Cite</h3>
+      <span class="cite-close">&times;</span>
+    </div>
+
+    <pre id="citeContent"></pre>
+
+    <div class="cite-actions">
+      <button id="copyCite" class="cite-btn-action">
+        <i class="fa fa-copy"></i> Copy
+      </button>
+
+      <a id="downloadCite"
+         class="cite-btn-action"
+         download="citation.bib">
+         <i class="fa fa-download"></i> Download
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const modal = document.getElementById("citeModal");
+  const content = document.getElementById("citeContent");
+  const closeBtn = document.querySelector(".cite-close");
+  const copyBtn = document.getElementById("copyCite");
+  const downloadBtn = document.getElementById("downloadCite");
+
+  document.querySelectorAll(".cite-trigger").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const bib = this.getAttribute("data-cite");
+      const cleaned = bib
+		.replace(/\t/g, '')
+		.replace(/^\s+/gm, '')
+		.replace(/\n/g, '\n  ')
+		.replace(/\{\n\s+/g, '{\n  ')
+		.replace(/\n\s*\}$/, '\n}')   
+		.trim();
+
+	  content.textContent = cleaned;
+      modal.style.display = "block";
+
+      const blob = new Blob([bib], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      downloadBtn.href = url;
+    });
+  });
+
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  window.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  copyBtn.onclick = function() {
+    navigator.clipboard.writeText(content.textContent);
+    copyBtn.textContent = "Copied!";
+    setTimeout(() => copyBtn.textContent = "Copy", 1500);
+  };
+
+});
+</script>
+
 <body>
 <div id="colorlib-page">
 <div class="container-wrap">
@@ -108,7 +180,26 @@ src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=uk7inqkcxD7zV_n2SjGvBUP
 	</span>
 	<span style="float:right;">2026</span>
 	<div style="clear:both;"></div>
-	<span style=color:#777;">*Work done at Vingroup Big Data Institute</span>
+	<span style="color:#777;">*Work done at Vingroup Big Data Institute</span>
+
+	<div class="pub-buttons">
+		<a href="papers/2026_VN1K.pdf" target="_blank" class="pub-btn">PDF</a>
+		<button class="pub-btn cite-trigger"
+				data-cite='@article{Tran2025.04.15.648991,
+			author = {Tran, Trang T. H. and Hoang, Tham H. and Tran, Mai H. and Nguyen, Nguyen T. and Nguyen, Dat T. and Pham, Tien M. and Nguyen, Nam N. and Vu, Giang M. and Duong, Vinh C. and Vu, Quang T. and Nguyen, Thien K. and Nguyen, Sang V. and Vu, Hien Q. and Nguyen, Trang M. and Dang, Toan and Nguyen, Hoang and Do, Tuan and Le, Cuong and Nguyen, Hung T. T. and Le, Nam Q. and Nguyen, Quang-Huy and Le, Linh T. and Pham, Thang and Dao, Minh and Vu, Duc M. and Le, Huong T. T. and Ngo, Tho D. and Nguyen, Liem T. and Hoang, Yen and Dao, Dat X. and Phan, Giang H. and Nguyen, Loan and Ha, Chi Trung and Luu, Hung N. and Le, Vinh and Tran, Thinh and Le, Ly and Duong, Nguyen Thuy and Le, Duc-Hau and Nguyen, Quan and Vu, Van H. and Vo, Nam S.},
+			title = {{VN1K: a genome graph-based and function-driven multi-omics and phenomics resource for the Vietnamese population}},
+			journal = {bioRxiv},
+			volume = {},
+			number = {},
+			pages = {},
+			year = {2025},
+			doi = {10.1101/2025.04.15.648991},
+			publisher = {Cold Spring Harbor Laboratory Press},
+			}'>
+			Cite
+		</button>
+		<a href="https://doi.org/10.1101/2025.04.15.648991" target="_blank" class="pub-btn">DOI</a>
+	</div>
 </li>
 
 <li>
@@ -119,6 +210,25 @@ src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=uk7inqkcxD7zV_n2SjGvBUP
 	</span>
 	<span style="float:right;">2026</span>
 	<div style="clear:both;"></div>
+
+	<div class="pub-buttons">
+		<a href="papers/2026_scbatchprox.pdf" target="_blank" class="pub-btn">PDF</a>
+		<button class="pub-btn cite-trigger"
+				data-cite='@article{nguyen2026federatedinspiredsinglecellbatchintegration,
+			author = {Quang-Huy Nguyen and Zongliang, Yue and Hao, Chen and Wei-Shinn Ku and Jiaqi Wang},
+			title = {{Federated-inspired Single-cell Batch Integration in Latent Space}},
+			journal = {arXiv},
+			volume = {},
+			number = {},
+			pages = {},
+			year = {2026},
+			doi = {10.48550/arXiv.2602.00423},
+			publisher = {Cornell University},
+			}'>
+			Cite
+		</button>
+		<a href="https://doi.org/10.48550/arXiv.2602.00423" target="_blank" class="pub-btn">DOI</a>
+	</div>
 </li>
 
 <li>
@@ -129,6 +239,25 @@ src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=uk7inqkcxD7zV_n2SjGvBUP
 	</span>
 	<span style="float:right;">2026</span>
 	<div style="clear:both;"></div>
+
+	<div class="pub-buttons">
+		<a href="papers/2026_fedwq-cp.pdf" target="_blank" class="pub-btn">PDF</a>
+		<button class="pub-btn cite-trigger"
+				data-cite='@article{nguyen2026conformalizedneuralnetworksfederated,
+			author = {Quang-Huy Nguyen and Jiaqi Wang and Wei-Shinn Ku},
+			title = {{Conformalized Neural Networks for Federated Uncertainty Quantification under Dual Heterogeneity}},
+			journal = {arXiv},
+			volume = {},
+			number = {},
+			pages = {},
+			year = {2026},
+			doi = {10.48550/2602.23296},
+			publisher = {Cornell University},
+			}'>
+			Cite
+		</button>
+		<a href="https://doi.org/10.48550/arXiv.2602.23296" target="_blank" class="pub-btn">DOI</a>
+	</div>
 </li>
 
 </ul>
@@ -147,6 +276,25 @@ Ching-Lan Chang†, Michael A. Moshi†, <b>Quang-Huy Nguyen†</b>, ..., David 
 </span>
 <span style="float:right;">2026</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2026_wastewater_intelligence_candida_auris.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{Chang2025.07.29.25332388,
+		author = {Chang, Ching-Lan and Moshi, Michael A. and Nguyen, Quang-Huy and Oh, Junghun and Nguyen, Ha and Paranjape, Pratik and Abushanab, Mohammed and Tang, Austin J. and Itorralba, Jose Yani and Massic, Lauryn and Khan, Eakalak and Lockett, Cassius and Kan, Horng-Yuan and Pandori, Mark and Gerrity, Daniel and Vo, Van and Nguyen, Tin and Hess, David and Oh, Edwin C.},
+		title = {{Wastewater intelligence predicts the emergence of clinically-relevant and drug-resistant Candida auris at healthcare facilities}},
+		journal = {medRxiv},
+		volume = {},
+		number = {},
+		pages = {},
+		year = {2025},
+		doi = {10.1101/2025.07.29.25332388},
+		publisher = {Cold Spring Harbor Laboratory Press},
+		}'>
+		Cite
+	</button>
+	<a href="https://doi.org/10.1101/2025.07.29.25332388" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -157,6 +305,25 @@ Ching-Lan Chang†, Michael A. Moshi†, <b>Quang-Huy Nguyen†</b>, ..., David 
 </span>
 <span style="float:right;">2024</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2024_review_metabolomics_pathway_analysis.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{10.1093/bib/bbae498,
+		author = {Nguyen, Quang-Huy and Nguyen, Ha and Oh, Edwin C. and Nguyen, Tin},
+		title = {{Current approaches and outstanding challenges of functional annotation of metabolites: a comprehensive review}},
+		journal = {Briefings in Bioinformatics},
+		volume = {25},
+		number = {6},
+		pages = {bbae498},
+		year = {2024},
+		publisher = {Oxford University Press},
+		}'>
+		Cite
+	</button>
+	<a href="https://github.com/tinnlab/metabolite-pathway-review-docker" target="_blank" class="pub-btn">Code</a>
+	<a href="https://doi.org/10.1093/bib/bbae498" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -167,6 +334,25 @@ Ching-Lan Chang†, Michael A. Moshi†, <b>Quang-Huy Nguyen†</b>, ..., David 
 </span>
 <span style="float:right;">2022</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2022_drga.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{Nguyen.drga,
+		author = {Nguyen, Quang-Huy and Nguyen, Tin and Le, Duc-Hau},
+		title = {{DrGA: cancer driver gene analysis in a simpler manner}},
+		journal = {BMC Bioinformatics},
+		volume = {23},
+		number = {},
+		pages = {86},
+		year = {2022},
+		publisher = {BioMed Central},
+		}'>
+		Cite
+	</button>
+	<a href="https://github.com/huynguyen250896/DrGA" target="_blank" class="pub-btn">Code</a>
+	<a href="https://doi.org/10.1186/s12859-022-04606-0" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -177,6 +363,24 @@ Ching-Lan Chang†, Michael A. Moshi†, <b>Quang-Huy Nguyen†</b>, ..., David 
 </span>
 <span style="float:right;">2022</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2022_three_hub_long_noncoding_rnas_with_m6A.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{10.3389/fmolb.2022.801931,
+		author = {Nguyen, Quang-Huy and Nguyen, Tin and Le, Duc-Hau},
+		title = {{Identification and Validation of a Novel Three Hub Long Noncoding RNAs With m6A Modification Signature in Low-Grade Gliomas}},
+		journal = {Frontiers in Molecular Biosciences},
+		volume = {9},
+		number = {},
+		pages = {801931},
+		year = {2022},
+		publisher = {Frontiers Media S.A.},
+		}'>
+		Cite
+	</button>
+	<a href="https://doi.org/10.3389/fmolb.2022.801931" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -187,6 +391,25 @@ Ching-Lan Chang†, Michael A. Moshi†, <b>Quang-Huy Nguyen†</b>, ..., David 
 </span>
 <span style="float:right;">2022</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2022_ocem.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{Nguyen.ocem,
+		author = {Nguyen, Quang-Huy and Le, Duc-Hau},
+		title = {{oCEM: Automatic detection and analysis of overlapping co-expressed gene modules}},
+		journal = {BMC Genomics},
+		volume = {23},
+		number = {},
+		pages = {39},
+		year = {2022},
+		publisher = {BioMed Central},
+		}'>
+		Cite
+	</button>
+	<a href="https://github.com/huynguyen250896/oCEM" target="_blank" class="pub-btn">Code</a>
+	<a href="https://doi.org/10.1186/s12864-021-08072-5" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -197,16 +420,53 @@ Thi Hai Yen Nguyen†, Tin Nguyen, <b>Quang-Huy Nguyen†*</b>, Duc-Hau Le*.
 </span>
 <span style="float:right;">2021</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2021_re_identification.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{10.3389/fonc.2021.731548,
+		author = {Nguyen, Thi Hai Yen and Nguyen, Tin and Nguyen, Quang-Huy and Le, Duc-Hau},
+		title = {{Re-identification of patient subgroups in Uveal Melanoma}},
+		journal = {Frontiers in Oncology},
+		volume = {11},
+		number = {},
+		pages = {731548},
+		year = {2021},
+		publisher = {Frontiers Media S.A.},
+		}'>
+		Cite
+	</button>
+	<a href="https://github.com/huynguyen250896/UMSubtyping" target="_blank" class="pub-btn">Code</a>
+	<a href="https://doi.org/10.3389/fonc.2021.731548" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
 <span>
 <b>Quang-Huy Nguyen</b>, Duc-Hau Le. 
 <em>Similarity calculation, enrichment analysis, and ontology visualization of biomedical ontologies using UFO.</em> 
-<b>Current Protocols in Bioinformatics</b>, 1:e115.
+<b>Current Protocols in Bioinformatics</b>, 1(4):e115.
 </span>
 <span style="float:right;">2021</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="https://huynguyen250896.github.io/" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{10.3389/fonc.2021.731548,
+		author = {Nguyen, Quang-Huy and Le, Duc-Hau},
+		title = {{Similarity Calculation, Enrichment Analysis, and Ontology Visualization of Biomedical Ontologies using UFO}},
+		journal = {Current Protocols},
+		volume = {1},
+		number = {4},
+		pages = {e115},
+		year = {2021},
+		publisher = {John Wiley \& Sons, Ltd},
+		}'>
+		Cite
+	</button>
+	<a href="https://doi.org/10.1002/cpz1.115" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -217,6 +477,25 @@ Thi Hai Yen Nguyen†, Tin Nguyen, <b>Quang-Huy Nguyen†*</b>, Duc-Hau Le*.
 </span>
 <span style="float:right;">2020</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2020_improving_pipeline_driver_gene.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{Nguyen2020improving,
+		author = {Nguyen, Quang-Huy and Le, Duc-Hau},
+		title = {{Improving existing analysis pipeline to identify and analyze cancer driver genes using multi-omics data}},
+		journal = {Scientific Reports},
+		volume = {10},
+		number = {},
+		pages = {20521},
+		year = {2020},
+		publisher = {Springer Nature},
+		}'>
+		Cite
+	</button>
+	<a href="https://github.com/hauldhut/drivergene" target="_blank" class="pub-btn">Code</a>
+	<a href="https://doi.org/10.1038/s41598-020-77318-1" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <li>
@@ -227,6 +506,24 @@ Thi Hai Yen Nguyen†, Tin Nguyen, <b>Quang-Huy Nguyen†*</b>, Duc-Hau Le*.
 </span>
 <span style="float:right;">2020</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="papers/2020_subgroups_of_breast_cancer.pdf" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@article{Nguyen2020multiomics,
+		author = {Nguyen, Quang-Huy and Nguyen, Hung and Nguyen, Tin and Le, Duc-Hau},
+		title = {{Multi-Omics Analysis Detects Novel Prognostic Subgroups of Breast Cancer}},
+		journal = {Frontiers in Genetics},
+		volume = {11},
+		number = {},
+		pages = {574661},
+		year = {2020},
+		publisher = {Frontiers Media S.A.},
+		}'>
+		Cite
+	</button>
+	<a href="https://doi.org/10.3389/fgene.2020.574661" target="_blank" class="pub-btn">DOI</a>
+</div>
 </li>
 
 <p style="font-weight:bold; color:red; margin-bottom:0; margin-top:30px;">
@@ -241,6 +538,24 @@ Hung Nguyen, Bang Tran, Duc Tran, <b>Quang-Huy Nguyen</b>, Duc-Hau Le, Tin Nguye
 </span>
 <span style="float:right;">2020</span>
 <div style="clear:both;"></div>
+
+<div class="pub-buttons">
+	<a href="https://huynguyen250896.github.io/" target="_blank" class="pub-btn">PDF</a>
+	<button class="pub-btn cite-trigger"
+			data-cite='@inproceedings{9287843,
+		author = {Nguyen, Hung and Tran, Bang and Tran, Duc and Nguyen, Quang-Huy and Le, Duc-Hau and Nguyen, Tin},
+		title = {{Disease subtyping using community detection from consensus networks}},
+		booktitle = {2020 12th International Conference on Knowledge and Systems Engineering (KSE)},
+		volume = {},
+		number = {},
+		pages = {318--323},
+		year = {2020},
+		organization = {IEEE},
+		address={Can Tho, Vietnam}
+		}'>
+		Cite
+	</button>
+	<a href="https://doi.org/10.1109/KSE50997.2020.9287843" target="_blank" class="pub-btn">DOI</a>
 </li>
 
 </ol>
@@ -263,4 +578,4 @@ Hung Nguyen, Bang Tran, Duc Tran, <b>Quang-Huy Nguyen</b>, Duc-Hau Le, Tin Nguye
 <script src="js/main.js"></script>
 
 </body>
-</html>
+</html>h
