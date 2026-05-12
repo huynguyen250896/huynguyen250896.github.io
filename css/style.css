@@ -1896,3 +1896,74 @@ body.offcanvas {
 .cv-card:first-of-type {
   margin-top: 0;
 }
+
+
+
+/* MEDIA PAGE */
+.media-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 36px;
+}
+
+.media-text {
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.media-item .media-img-wrap {
+  flex: 0 0 150px !important;
+  width: 150px !important;
+  max-width: 150px !important;
+}
+
+.media-item .media-img {
+  width: 150px !important;
+  height: auto !important;
+  max-width: 150px !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+@media screen and (max-width: 768px) {
+  .media-item {
+    display: block;
+    margin-bottom: 42px;
+  }
+
+  .media-img-wrap {
+    max-width: 320px;
+    margin-bottom: 18px;
+  }
+}
+
+
+/* PUBLICATION SEARCH */
+.pub-search-wrap {
+  max-width: 450px;
+  margin: 10px 0 25px 0;
+}
+
+.pub-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  outline: none;
+  font-family: "Quicksand", Arial, sans-serif;
+}
+
+.pub-search-input:focus {
+  border-color: #2c98f0;
+  box-shadow: 0 0 0 2px rgba(44, 152, 240, 0.12);
+}
+
+.pub-search-count {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #777;
+}

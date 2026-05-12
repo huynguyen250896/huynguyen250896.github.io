@@ -131,6 +131,7 @@ aria-expanded="false" aria-controls="navbar"><i></i></a>
 <ul>
 <li><a href="index.html">Home</a></li>
 <li class="active"><a href="Publications.html">Publications</a></li>
+<li><a href="Media.html">Media</a></li>
 <li><a href="Talk.html">Talks</a></li>
 <li><a href="CV.html">CV</a></li>
 </ul>
@@ -145,7 +146,7 @@ aria-expanded="false" aria-controls="navbar"><i></i></a>
 		All rights reserved | This template is made with 
 		<i class="icon-heart" aria-hidden="true"></i> 
 		by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-		<span>Last Update: May 8, 2026</span>
+		<span>Last Update: May 12, 2026</span>
 	</small></p>
 </div>
 <script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=t&d=qux77UJkQmoXIAdGH0Fv3JNvAse5rxMSPJQBrSbpAX0&co=6fa5cb'></script>
@@ -167,6 +168,14 @@ aria-expanded="false" aria-controls="navbar"><i></i></a>
 <div class="col-md-12 animate-box">
 <p>†co-first author, *co-corresponding author</p>
 
+
+<div class="pub-search-wrap">
+	<input type="text"
+	       id="pubSearch"
+	       class="pub-search-input"
+	       placeholder="Search publications by keyword, author, title, venue, year...">
+	<div id="pubSearchCount" class="pub-search-count"></div>
+</div>
 
 <ul>
 <p style="font-weight:bold; color:red; margin-bottom:0; margin-top:0;">Preprints</p>
@@ -326,6 +335,7 @@ Peer-reviewed Publications
 			Cite
 		</button>
 		<a href="https://doi.org/10.1101/2025.04.15.648991" target="_blank" class="pub-btn">DOI</a>
+		<a href="https://vingen.vinbigdata.org/en/vn1k/" target="_blank" class="pub-btn">Project Website</a>
 	</div>
 </li>
 
@@ -641,5 +651,45 @@ Hung Nguyen, Bang Tran, Duc Tran, <b>Quang-Huy Nguyen</b>, Duc-Hau Le, Tin Nguye
 <script src="js/jquery.countTo.js"></script>
 <script src="js/main.js"></script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById("pubSearch");
+  const countBox = document.getElementById("pubSearchCount");
+
+  if (!searchInput) return;
+
+  const publicationItems = document.querySelectorAll(
+    ".colorlib-publications ul li, .colorlib-publications ol li"
+  );
+
+  function normalizeText(text) {
+    return text.toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  function filterPublications() {
+    const query = normalizeText(searchInput.value);
+    let visibleCount = 0;
+
+    publicationItems.forEach(function(item) {
+      const itemText = normalizeText(item.textContent);
+
+      if (query === "" || itemText.includes(query)) {
+        item.style.display = "";
+        visibleCount++;
+      } else {
+        item.style.display = "none";
+      }
+    });
+
+    if (query === "") {
+      countBox.textContent = "";
+    } else {
+      countBox.textContent = visibleCount + " result" + (visibleCount === 1 ? "" : "s") + " found";
+    }
+  }
+
+  searchInput.addEventListener("input", filterPublications);
+});
+</script>
 </body>
-</html>h
+</html>
